@@ -6,10 +6,11 @@ public class AsteroidGenerator : MonoBehaviour {
 
     [SerializeField] private GameObject asteroidPrefab;
     
+    
 
 	// Use this for initialization
 	void Start () {
-        for (int i = 0; i < 10000; i++)
+        for (int i = 0; i < 1000; i++)
         {
             int s = i / 128;
             float x = 0, y = 0, z = 0;
@@ -73,36 +74,47 @@ public class AsteroidGenerator : MonoBehaviour {
                     }
             }
 
-            GameObject newAsteroid =
+            /*GameObject newAsteroid =
                 Instantiate(
                 asteroidPrefab,
-                new Vector3(Random.Range(1000, 30000 * x), Random.Range(1000, 30000 * y), Random.Range(1000, 30000 * z)),
+                new Vector3(Random.Range(10000, 30000 * x), Random.Range(10000, 30000 * y), Random.Range(10000, 30000 * z)),
                 Quaternion.Euler(Random.Range(0, 270), Random.Range(0, 270), Random.Range(0, 270))
                 );
             newAsteroid.transform.localScale = new Vector3(Random.Range(1000, 5000), Random.Range(1000, 5000), Random.Range(1000, 5000));
 
             Rigidbody r = newAsteroid.GetComponent<Rigidbody>();
-            r.AddRelativeForce(new Vector3(Random.Range(0, 1000), Random.Range(0, 1000), Random.Range(0, 1000)) * Random.Range(0, 1000));
             r.mass = newAsteroid.transform.localScale.x * newAsteroid.transform.localScale.y * newAsteroid.transform.localScale.z;
+            r.AddRelativeForce(new Vector3(Random.Range(0, 1000), Random.Range(0, 1000), Random.Range(0, 1000)) * r.mass);*/
+
+            Vector3 tempPos = new Vector3(Random.Range(-10000, 10000), Random.Range(-10000, 10000), Random.Range(10000, 30000));
+            Vector3 tempScale = new Vector3(Random.Range(500, 1000), Random.Range(500, 1000), Random.Range(500, 1000));
+            float maxSide = tempScale.x;
+            maxSide = maxSide < tempScale.y ? tempScale.y : maxSide;
+            maxSide = maxSide < tempScale.z ? tempScale.z : maxSide;
+
+            Collider[] colliders = Physics.OverlapSphere(tempPos, maxSide);
+
+            if (colliders.Length == 0)
+            {
+                GameObject newAsteroid =
+                    Instantiate(
+                    asteroidPrefab,
+                    tempPos,
+                    Quaternion.Euler(Random.Range(0, 270), Random.Range(0, 270), Random.Range(0, 270))
+                    );
+                newAsteroid.transform.localScale = tempScale;
+
+                Rigidbody r = newAsteroid.GetComponent<Rigidbody>();
+                r.mass = newAsteroid.transform.localScale.x * newAsteroid.transform.localScale.y * newAsteroid.transform.localScale.z;
+                r.angularVelocity = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+                r.velocity = new Vector3(Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f), Random.Range(-1000f, 1000f));
+            }
+
         }
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
-        //if (i < 1000)
-        //{
-            
 
-        //    /*newAsteroid.transform.position = new Vector3(Random.Range(100, 1000 * x), Random.Range(100, 1000 * y), Random.Range(100, 1000 * z));
-        //    if (Mathf.Abs(newAsteroid.transform.position.x) < 10 || Mathf.Abs(newAsteroid.transform.position.y) < 10 || Mathf.Abs(newAsteroid.transform.position.z) < 10)
-        //        newAsteroid.transform.position += new Vector3(10 * (newAsteroid.transform.position.x < 0 ? -1 : 1), 10 * (newAsteroid.transform.position.y < 0 ? -1 : 1), 10 * (newAsteroid.transform.position.z < 0 ? -1 : 1));
-        //    newAsteroid.transform.rotation *= Quaternion.Euler(Random.Range(0, 270), Random.Range(0, 270), Random.Range(0, 270));*/
-
-        //    //Rigidbody r = newAsteroid.GetComponent<Rigidbody>();
-        //    //r.AddRelativeForce(new Vector3(Random.Range(0, 270), Random.Range(0, 270), Random.Range(0, 270)) * Random.Range(0, 100));
-
-
-        //    i++;
-        //}
     }
 }

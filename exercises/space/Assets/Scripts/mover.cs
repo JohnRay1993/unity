@@ -6,6 +6,7 @@ public class mover : MonoBehaviour {
 
     [SerializeField] private GameObject firePrefab;
     [SerializeField] private Transform fireTransform;
+    [SerializeField] private LineRenderer line;
 
     Rigidbody playerRigidbody;
 
@@ -23,15 +24,16 @@ public class mover : MonoBehaviour {
 
         transform.Rotate(ws, ad, qe);
 
+
+        
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.Translate(transform.forward * 1000);
-            //playerRigidbody.AddForce(transform.forward * 300);
+            transform.Translate(0, 0, 1000);
         }
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            GameObject newFire = Instantiate(firePrefab, fireTransform);
+            GameObject newFire = Instantiate(firePrefab, fireTransform.position, fireTransform.rotation);
             Rigidbody r = newFire.GetComponent<Rigidbody>();
             r.AddForce(transform.forward * 1000000);
             Destroy(newFire, 30);

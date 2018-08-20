@@ -55,7 +55,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AsteroidGenerator.cs" />
      <Compile Include="Assets\Scripts\Destroy.cs" />
+     <Compile Include="Assets\Scripts\FireMover.cs" />
      <Compile Include="Assets\Scripts\mover.cs" />
+     <Compile Include="Assets\Scripts\temp.cs" />
+     <Compile Include="Assets\Scripts\TestAstrMover.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>F:/SECH/GitHub/unity/exercises/space/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
