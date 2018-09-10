@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BookStore
+{
+    public enum PaymentType
+    {
+        none,
+        cash,
+        card,
+        installments,
+        credit,
+        comeback,
+        discount
+    };
+}
