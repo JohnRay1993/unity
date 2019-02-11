@@ -39,11 +39,11 @@ public class Map : MonoBehaviour
         int height = 4;
         int width = 4;
 
-        for (int x = 0; x < height; x++)
+        for (int x = 0; x < height * 10; x++)
         {
-            for (int y = 0; y < width; y++)
+            for (int y = 0; y < width * 10; y++)
             {
-                index = (int)(y * width + x);
+                index = y * width + x;
 
                 vertices[index] = new Vector3(x, y, 0);
                 UVs[index] = new Vector2(x, y);
